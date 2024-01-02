@@ -1,0 +1,56 @@
+{% extends "base.html"%}
+{% block start %}
+
+<div class="container mt-5">
+    <form class="col-6 mx-auto card p-3 shadow-lg p-3 mb-5 bg-white rounded" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2 class="text-center">Add Recepe</h2>
+        <hr>
+        <div class="mb-3">
+          <label for="exampleInputEmail1">Recepi Name</label>
+          <input name="recipe_name" type="text" class="form-control">
+            
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1">Recepi Descriptions</label>
+            <textarea class="form-control"name="recipe_description"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleInputPassword1">Recepi image
+            <input name="recipe_pic" type="file" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-success mb-5">Add recepi</button>
+
+      </form>
+  
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">sr no</th>
+            <th scope="col">Recepi name</th>
+            <th scope="col">recipe_description</th>
+            <th scope="col">recipe_pic</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+
+            {% for recepi in recepi %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{recepi.recipe_name}}</td>
+            <td>{{recepi.recipe_description}}</td>
+            <td><img src="/media/{{recepi.recipe_pic}}" style="height:200px"></td>
+            <td>
+                <a href="/delete_recepi/{{recepi.id}}" class="btn btn-danger m-2">Delete</button>
+                <a href="/update_recepi/{{recepi.id}}" class="btn btn-success">update</button>
+            </td>
+          </tr>
+         {%endfor %}
+        </tbody>
+      </table>
+</div>
+
+{% endblock %}

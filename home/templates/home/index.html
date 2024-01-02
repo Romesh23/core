@@ -1,0 +1,34 @@
+{% extends "base.html"%}
+{% block start %}
+<a href="/about/"">
+about
+</a>
+|
+<a href="/contact/">
+contact
+</a>
+    <h1>thiss is jango server </h1>
+
+    <table class="container">
+        <tr >
+          <th>s.no</th>
+          <th>name</th>
+          <th>age</th>
+          <th>can vote</th>
+        </tr>
+        {% for i in people %}   
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{i.name}}</td>
+          <td>{{i.age}}</td>
+          <td  {% if i.age <= 18 %} style="background-color: red;" {% endif %}>
+            {% if i.age >= 18 %}
+            vote
+            {% else %}
+            cant vote
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+{% endblock %}
